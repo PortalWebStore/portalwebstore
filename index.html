@@ -201,7 +201,7 @@ document.getElementById('searchInput').addEventListener('keypress', function(eve
 
         // Função para buscar no estoque local e na API do Google
         function searchInStockAndAPI(searchTerm) {
-            var url = 'https://gist.githubusercontent.com/PortalWebStore/372e640da62bb3b449ebdc984223d8b4/raw/288ec305833183a04a804599741a9cd9c0f3e4f3/estoque.txt';
+            var url = 'https://gist.githubusercontent.com/PortalWebStore/372e640da62bb3b449ebdc984223d8b4/raw';
             fetch(url)
                 .then(response => response.text())
                 .then(data => {
