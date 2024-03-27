@@ -350,7 +350,7 @@ function hndlr(response) {
 
         // Função para carregar e exibir os produtos recentes
         function loadRecentProducts() {
-            fetch('https://gist.githubusercontent.com/PortalWebStore/2bd83caa93df17d3fcd8aefea21968bc/raw/af4d27449d47c090d419ff833443edd9ffea4b4f/recente.txt')
+            fetch('https://gist.githubusercontent.com/PortalWebStore/2bd83caa93df17d3fcd8aefea21968bc')
                 .then(response => response.text())
                 .then(data => {
                     var products = data.trim().split('\n').slice(-5); // Obtém os últimos 5 produtos do arquivo
