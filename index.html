@@ -143,7 +143,7 @@
                     <option value="site:https://magazineluiza.com.br">MagaLu</option>
                     <option value="site:https://shopee.com.br">Shopee</option>
                     <option value="site:https://mercadolivre.com.br">Mercado Livre</option>
-                    <!-- Adicione outras opções de sites aqui -->
+                    <!-- Adicione outras opÃ§Ãµes de sites aqui -->
                 </select>
                 <button id="searchButton">Pesquisar</button>
             </div>
@@ -169,10 +169,10 @@
             'mercadolivre.com.br': function(link) {
                 return link + '?tag=seu_codigo_de_afiliado';
             }
-            // Adicione mais sites e suas respectivas regras de afiliado conforme necessário
+            // Adicione mais sites e suas respectivas regras de afiliado conforme necessÃ¡rio
         };
 
-        // Função para realizar a pesquisa
+        // FunÃ§Ã£o para realizar a pesquisa
         function performSearch() {
     var searchTerm = document.getElementById('searchInput').value.trim();
     if (!searchTerm) return; // Ignorar pesquisa vazia
@@ -181,27 +181,27 @@
     var searchResultsContainer = document.getElementById('searchResults');
     searchResultsContainer.innerHTML = '';
 
-    // Desativar botão durante o carregamento
+    // Desativar botÃ£o durante o carregamento
     var searchButton = document.getElementById('searchButton');
     searchButton.disabled = true;
 
     searchInStockAndAPI(searchTerm);
 }
 
-        // Evento de clique no botão
+        // Evento de clique no botÃ£o
         document.getElementById('searchButton').addEventListener('click', performSearch);
 
         // Evento de pressionar Enter no campo de entrada
 document.getElementById('searchInput').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
         performSearch();
-        event.preventDefault(); // Evita o comportamento padrão de envio de formulário ao pressionar Enter
+        event.preventDefault(); // Evita o comportamento padrÃ£o de envio de formulÃ¡rio ao pressionar Enter
     }
 });
 
-        // Função para buscar no estoque local e na API do Google
+        // FunÃ§Ã£o para buscar no estoque local e na API do Google
         function searchInStockAndAPI(searchTerm) {
-            var url = 'https://gist.githubusercontent.com/somente/5708791b1e846a51092382bd22d1de20/raw/36063d77e90d8133088b2134adf69f8af06d4144/estoque.txt';
+            var url = 'https://gist.githubusercontent.com/PortalWebStore/372e640da62bb3b449ebdc984223d8b4/raw/288ec305833183a04a804599741a9cd9c0f3e4f3/estoque.txt';
             fetch(url)
                 .then(response => response.text())
                 .then(data => {
@@ -211,12 +211,12 @@ document.getElementById('searchInput').addEventListener('keypress', function(eve
                         var parts = lines[i].split(' ');
                         if (parts[0] === searchTerm) {
                             found = true;
-                            var link = parts.slice(1).join(' '); // Juntar todos os elementos após o primeiro para obter o link completo
-                            // Verificar se o link começa com 'http://', 'https://' ou 'www.'
+                            var link = parts.slice(1).join(' '); // Juntar todos os elementos apÃ³s o primeiro para obter o link completo
+                            // Verificar se o link comeÃ§a com 'http://', 'https://' ou 'www.'
                             if (link.startsWith('http://') || link.startsWith('https://')) {
                                 window.open(link, '_blank'); // Abrir o link direto em uma nova aba
                             } else if (link.startsWith('www.')) {
-                                // Adicionar 'http://' antes de links que começam com 'www.'
+                                // Adicionar 'http://' antes de links que comeÃ§am com 'www.'
                                 link = 'http://' + link;
                                 window.open(link, '_blank'); // Abrir o link direto em uma nova aba
                             } else {
@@ -226,7 +226,7 @@ document.getElementById('searchInput').addEventListener('keypress', function(eve
                         }
                     }
                     if (!found) {
-                        searchInGoogleAPI(searchTerm); // Se o item não for encontrado, usar o termo de pesquisa para a API do Google
+                        searchInGoogleAPI(searchTerm); // Se o item nÃ£o for encontrado, usar o termo de pesquisa para a API do Google
                     }
                 })
                 .catch(error => {
@@ -235,7 +235,7 @@ document.getElementById('searchInput').addEventListener('keypress', function(eve
                 });
         }
 
-        // Função para buscar na API do Google
+        // FunÃ§Ã£o para buscar na API do Google
         function searchInGoogleAPI(searchTerm) {
             var apiKey = 'AIzaSyAUQkJLhtAk0lkfGENFVEk_qkmqCuftpAA'; // Substitua com sua chave da API do Google Custom Search
             var cx = 'a1324bfe9d0b14e00'; // Substitua com o ID do seu Custom Search Engine
@@ -244,7 +244,7 @@ document.getElementById('searchInput').addEventListener('keypress', function(eve
 
             var apiUrl = 'https://www.googleapis.com/customsearch/v1?key=' + apiKey + '&cx=' + cx;
 
-            // Adicionar operador 'site:' se um site específico for selecionado
+            // Adicionar operador 'site:' se um site especÃ­fico for selecionado
             if (selectedSite !== 'all') {
                 apiUrl += '&q=' + encodeURIComponent(selectedSite + ' ' + searchTerm); // Encode o termo de pesquisa
             } else {
@@ -265,21 +265,21 @@ document.getElementById('searchInput').addEventListener('keypress', function(eve
                 })
                 .catch(error => {
                     console.error('Erro ao buscar na API do Google:', error);
-                    // Reativar o botão de pesquisa em caso de erro
+                    // Reativar o botÃ£o de pesquisa em caso de erro
                     var searchButton = document.getElementById('searchButton');
                     searchButton.disabled = false;
                 });
         }
 
-        // Função de manipulação do retorno da pesquisa
+        // FunÃ§Ã£o de manipulaÃ§Ã£o do retorno da pesquisa
 function hndlr(response) {
     var searchResultsContainer = document.getElementById('searchResults');
     searchResultsContainer.innerHTML = ''; // Limpar resultados anteriores
 
-    // Verificar se há resultados
+    // Verificar se hÃ¡ resultados
     if (response.items && response.items.length > 0) {
         response.items.forEach(function(item) {
-            // Verificar se o link contém os termos indesejados
+            // Verificar se o link contÃ©m os termos indesejados
             if (!item.link.includes('/search') &&
                 !item.link.includes('/s?k=') &&
                 !item.link.includes('blog-da-lu/') &&
@@ -290,7 +290,7 @@ function hndlr(response) {
                 var resultDiv = document.createElement('div');
                 resultDiv.classList.add('search-result');
 
-                // Adicionar imagem do resultado (se disponível)
+                // Adicionar imagem do resultado (se disponÃ­vel)
                 if (item.pagemap && item.pagemap.cse_thumbnail && item.pagemap.cse_thumbnail.length > 0) {
                     var image = document.createElement('img');
                     image.src = item.pagemap.cse_thumbnail[0].src;
@@ -298,7 +298,7 @@ function hndlr(response) {
                     resultDiv.appendChild(image);
                 }
 
-                // Adicionar link e título do resultado
+                // Adicionar link e tÃ­tulo do resultado
                 var titleLink = document.createElement('a');
                 titleLink.textContent = item.title;
                 titleLink.classList.add('search-result-link');
@@ -327,11 +327,11 @@ function hndlr(response) {
                     resultDiv.appendChild(snippetParagraph);
                 }
 
-                // Adicionar botão "Saiba mais"
+                // Adicionar botÃ£o "Saiba mais"
                 var moreInfoButton = document.createElement('a');
                 moreInfoButton.textContent = 'Saiba mais';
                 moreInfoButton.classList.add('more-info-button');
-                moreInfoButton.href = titleLink.href; // O botão também leva ao link afiliado
+                moreInfoButton.href = titleLink.href; // O botÃ£o tambÃ©m leva ao link afiliado
                 moreInfoButton.target = '_blank'; // Abrir em uma nova aba
                 resultDiv.appendChild(moreInfoButton);
 
@@ -342,24 +342,24 @@ function hndlr(response) {
         searchResultsContainer.innerHTML = 'Nenhum resultado encontrado.';
     }
 
-    // Reativar o botão de pesquisa
+    // Reativar o botÃ£o de pesquisa
     var searchButton = document.getElementById('searchButton');
     searchButton.disabled = false;
 }
 
 
-        // Função para carregar e exibir os produtos recentes
+        // FunÃ§Ã£o para carregar e exibir os produtos recentes
         function loadRecentProducts() {
-            fetch('https://gist.githubusercontent.com/somente/7b50f49885e80f52bd05781e40095743/raw/88d3f4f7f0f5da7d7be589e251a199eec4794d07/recente.txt')
+            fetch('https://gist.githubusercontent.com/PortalWebStore/2bd83caa93df17d3fcd8aefea21968bc/raw/028342911bb0bd77323eccdbcc42287b440e0473/recente.txt')
                 .then(response => response.text())
                 .then(data => {
-                    var products = data.trim().split('\n').slice(-5); // Obtém os últimos 5 produtos do arquivo
+                    var products = data.trim().split('\n').slice(-5); // ObtÃ©m os Ãºltimos 5 produtos do arquivo
                     var recentProductsContainer = document.getElementById('recentProducts');
 
-                    recentProductsContainer.innerHTML = ''; // Limpa o conteúdo anterior
+                    recentProductsContainer.innerHTML = ''; // Limpa o conteÃºdo anterior
 
                     products.forEach(productInfo => {
-                        // Parse das informações do produto
+                        // Parse das informaÃ§Ãµes do produto
                         var [title, imageUrl, description, link] = productInfo.split(';');
 
                         // Crie elementos HTML para cada produto
@@ -371,18 +371,18 @@ function hndlr(response) {
                         productImage.alt = title;
                         productDiv.appendChild(productImage);
 
-                        // Crie um link envolvendo o título do produto
+                        // Crie um link envolvendo o tÃ­tulo do produto
                         var productNameLink = document.createElement('a');
                         productNameLink.href = link; // Atribui o link ao href do link
                         productNameLink.target = '_blank'; // Abrir em uma nova aba
-                        productNameLink.textContent = title; // Define o texto do link como o título do produto
+                        productNameLink.textContent = title; // Define o texto do link como o tÃ­tulo do produto
                         var productName = document.createElement('h3');
                         productName.appendChild(productNameLink);
                         productDiv.appendChild(productName);
 
                         var productDescription = document.createElement('p');
                         productDescription.textContent = description;
-                        productDescription.classList.add('search-result-description'); // Adiciona a classe para a descrição
+                        productDescription.classList.add('search-result-description'); // Adiciona a classe para a descriÃ§Ã£o
                         productDiv.appendChild(productDescription);
 
                         var moreInfoButton = document.createElement('a');
@@ -392,7 +392,7 @@ function hndlr(response) {
                         moreInfoButton.target = '_blank'; // Abrir em uma nova aba
                         productDiv.appendChild(moreInfoButton);
 
-                        // Adicione o card do produto ao contêiner de produtos recentes
+                        // Adicione o card do produto ao contÃªiner de produtos recentes
                         recentProductsContainer.appendChild(productDiv);
                     });
                 })
@@ -401,7 +401,7 @@ function hndlr(response) {
                 });
         }
 
-        // Execute a função ao carregar a página
+        // Execute a funÃ§Ã£o ao carregar a pÃ¡gina
         window.addEventListener('load', loadRecentProducts);
     </script>
 </body>
